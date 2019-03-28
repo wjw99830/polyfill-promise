@@ -1,0 +1,30 @@
+{
+  "name": "polyfill-promise-wjw",
+  "version": "0.0.1",
+  "description": "polyfill for native promise",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wjw99830/polyfill-promise.git"
+  },
+  "keywords": [
+    "promise",
+    "polyfill",
+    "polyfill-promise"
+  ],
+  "author": "wjw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wjw99830/polyfill-promise/issues"
+  },
+  "homepage": "https://github.com/wjw99830/polyfill-promise#readme",
+  "devDependencies": {
+    "jest": "^24.5.0"
+  }
+}
