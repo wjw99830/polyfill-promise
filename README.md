@@ -1,4 +1,8 @@
 # polyfill-promise
-
+Polyfill for native Promise.
+# Test
+> npm run test
 # Usage
-same as native Promise
++ then
++ catch
++ finally
