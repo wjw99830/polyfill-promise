@@ -53,3 +53,17 @@ it(`should recieve "I'm thrown and I'm in finally".`, () => {
     expect(payload).toBe(`I'm thrown and I'm in finally`);
   })
 });
+it(`should recieve ["p1", "p2", "p3"]`, () => {
+  Promise.all(
+    new Promise(r => setTimeout(r, 3000, 'p1')),
+    new Promise(r => setTimeout(r, 1000, 'p2')),
+    new Promise(r => setTimeout(r, 2000, 'p3')),
+  ).then(payload => expect(payload).toEqual(['p1', 'p2', 'p3']));
+});
+it(`should recieve "p2`, () => {
+  Promise.all(
+    new Promise(r => setTimeout(r, 3000, 'p1')),
+    new Promise(r => setTimeout(r, 1000, 'p2')),
+    new Promise(r => setTimeout(r, 2000, 'p3')),
+  ).then(payload => expect(payload).toBe('p2'));
+});

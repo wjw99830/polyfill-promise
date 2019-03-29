@@ -36,6 +36,54 @@ function createPromise() {
       }
     }, 0);
   }
+  Promise.all = function () {
+    var promises = arguments;
+    var length = promises.length;
+    var result = [];
+    var resolvedCount = 0;
+    return new Promise(function (resolve, reject) {
+      for (var i = 0; i < length; i++) {
+        var promise = promises[i];
+        if (promise instanceof Promise) {
+          (function (promise, i) {
+            promise.then(function (payload) {
+              result[i] = payload;
+              resolvedCount++;
+              if (resolvedCount === length) {
+                resolve(result);
+              }
+            }).catch(function (e) {
+              reject(e);
+            })
+          })(promise, i);
+        } else {
+          result[i] = promise;
+          resolvedCount++;
+          if (resolvedCount === length) {
+            resolve(result);
+          }
+        }
+      }
+    });
+  }
+  Promise.race = function () {
+    var promises = arguments;
+    var length = promises.length;
+    return new Promise(function (resolve, reject) {
+      for (var i = 0; i < length; i++) {
+        var promise = promises[i];
+        if (promise instanceof Promise) {
+          promise.then(function (payload) {
+            resolve(payload);
+          }).catch(function (e) {
+            reject(e);
+          });
+        } else {
+          resolve(promise);
+        }
+      }
+    })
+  }
   var proto = Promise.prototype;
   proto.PromiseStatus = PromiseStatus.PENDING;
   proto.then = function (onResolved, onRejected) {
